@@ -3,37 +3,39 @@
 TODO: send format to dad for him to add new data
 
 Note: If a game is a double (Ex: Oppenheimer), then if the user is PROMPTED with the first double (Ex: Good Will Hunting) and GUESSES the second double (Ex: Interstellar), the game should:
-    - show yellow
-    - say the user got BOTH actors correct
-    - SKIP (aka NOT prompt) the second double
+  - show yellow
+  - say the user got BOTH actors correct
+  - SKIP (aka NOT prompt) the second double
 
 Note: DO NOT ALLOW games to have UNMATCHED PAIRS. Meaning: if one pair exists (Ex: Good Will Hunting), then another pair MUST exist (Ex: Interstellar). Same with groups of 3, 4, or 5 actors (very rare). This all means that games w/ pairs only work if there are "n" actors who have shared "n + 1" movies, where 1 of the "n" is the answer, and the other "n" movies are clues, each with "n" actors as correct links.
 
 */
 
-const POSSIBLE_GAMES: PossibleGame[] = [
-    {
-        "movieClues": [
-            "Good Will Hunting",
-            "Interstellar",
-            "Iron Man",
-            "Inception",
-            "Little Women"
-        ],
-        "actorClues": [
-            ["Matt Damon", "Casey Affleck"],
-            ["Matt Damon", "Casey Affleck"],
-            ["Robert Downey Jr."],
-            ["Cillian Murphy"],
-            ["Florence Pugh"]
-        ],
-        "answer": "Oppenheimer"
-    }
+const POSSIBLE_GAMES: GameInfo[] = [
+  {
+    "movieClues": [
+      "Good Will Hunting",
+      "Interstellar",
+      "Iron Man",
+      "Inception",
+      "Little Women"
+    ],
+    "actorClues": [
+      ["Matt Damon", "Casey Affleck"],
+      ["Casey Affleck", "Matt Damon"],
+      ["Robert Downey Jr."],
+      ["Cillian Murphy"],
+      ["Florence Pugh"]
+    ],
+    "answer": "Oppenheimer"
+  }
 ];
+
+export default POSSIBLE_GAMES;
 
 /*
 
-const POSSIBLE_GAMES: PossibleGame[] = [
+const POSSIBLE_GAMES: GameInfo[] = [
   {
       "movieClues": [
           "Good Will Hunting",
@@ -630,5 +632,3 @@ const POSSIBLE_GAMES: PossibleGame[] = [
 ];
 
 */
-
-export default POSSIBLE_GAMES;

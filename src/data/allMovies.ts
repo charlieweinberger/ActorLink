@@ -1,7 +1,3 @@
-interface Movies {
-  [id: string]: string[];
-}
-
 const ALL_MOVIES: Movies = {
   '42': ["Chadwick Boseman", "Harrison Ford"],
   '12 Years a Slave': ["Brad Pitt", "Chiwetel Ejiofor", "Lupita Nyong'o", "Michael Fassbender", "Paul Dano", "Benedict Cumberbatch"],
