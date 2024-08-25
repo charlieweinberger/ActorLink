@@ -1,14 +1,12 @@
 "use client";
 
-// Imports
-
 import { useState } from "react";
 
-import Game from "./../components/game";
+import GuessDisplay from "./../components/guessDisplay";
+import Input from "./../components/input";
 import Description from "./../components/description";
 
-import POSSIBLE_GAMES from "./../data/possibleGames";
-import All_MOVIES from "./../data/allMovies";
+import POSSIBLE_GAMES from "../../data/possibleGames";
 
 // React helper functions
 
@@ -50,21 +48,44 @@ export default function Home() {
   
   // React
 
-  const [ runGame, setRunGame ] = useState(false);
-  const [ hardMode, setHardMode ] = useState(true); // Should be false, is only true for testing
   const [ gameInfo, setGameInfo ] = useState<GameInfo>({
     "movieClues": ["", "", "", "", ""],
     "actorClues": [ [""], [""], [""], [""], [""] ],
     "answer": ""
   });
+  const [ newGame, setNewGame ] = useState(false);
+  const [ hardMode, setHardMode ] = useState(true); // Should be false, is only true for testing
+  
+  const [ gameOver, setGameOver ] = useState(false);
+  const [ guess, setGuess ] = useState("");
+  const [ guesses, setGuesses ] = useState<string[]>([]);
 
-  const updateRunGame = () => {
-    setRunGame(true);
+  const createNewGame = () => {
+    setNewGame(true);
     setGameInfo(initializeGame());
   }
 
   const updateHardMode = () => {
     setHardMode(!hardMode);
+  }
+
+  const updateGuesses = async () => {
+
+    // Don't allow a guess if the game is over
+    if (guess == "" || gameOver) return;
+
+    // update guesses
+    setGuesses([ ...guesses, guess ]); // Add new guess and new empty string
+
+    // check for winner
+    if (guess === gameInfo.answer) {
+      console.log("You win!");
+      setGameOver(true);
+    } else if (guesses.length === 4) {
+      console.log("You lose!");
+      setGameOver(true);
+    }
+
   }
 
   // JSX
@@ -79,24 +100,32 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Buttons */}
-      <div className="flexContainer blackBorder gap-4">
+      {/* Game */}
+      <div className="w-1/2 h-full blackBorder p-4 flex flex-col gap-4">
+        
+        <div className="flexContainer blackBorder p-4 gap-4">
+          <button className="blackBorder p-4" onClick={ () => createNewGame() }>
+            New Game
+          </button>
+          <button className="blackBorder p-4" onClick={ () => updateHardMode() }>
+            Change to {hardMode ? "Easy" : "Hard"} Mode
+          </button>
+        </div>
 
-        {/* New game button */}
-        <button className="blackBorder p-4" onClick={ () => updateRunGame() }>
-          New Game
-        </button>
-
-        {/* Change difficulty button */}
-        <button className="blackBorder p-4" onClick={ () => updateHardMode() }>
-          Change to {hardMode ? "Easy" : "Hard"} Mode
-        </button>
+        <GuessDisplay
+          gameInfo={gameInfo} gameOver={gameOver} hardMode={hardMode} guesses={guesses}
+        ></GuessDisplay>
+        
+        <Input
+          className={gameOver ? "hidden" : ""}
+          guess={guess} setGuess={setGuess} updateGuesses={updateGuesses}
+        ></Input>
       
       </div>
 
-      {/* Game */}
-      {runGame ? <Game gameInfo={gameInfo} hardMode={hardMode} /> : <Description></Description>}
-      
+      {/* Description */}
+      <Description></Description>
+
       {/* Credits */}
       <div className="flexContainer blackBorder">
         <div className="blackBorder m-4">
