@@ -1,6 +1,12 @@
-import ALL_MOVIES from "../../data/allMovies";
+import ALL_MOVIES from "../../data/allMovies.json";
 
-export default function Input({ guess, setGuess, updateGuesses }: any): JSX.Element {
+export default function Input({ guess, setGuess, updateGuesses }: {
+  className: string,
+  guess: string,
+  setGuess: UseState<string>,
+  updateGuesses: UpdateUseState,
+}
+): JSX.Element {
 
   const sortMovies = () => {
     return Object.keys(ALL_MOVIES).filter((movie: string) => {

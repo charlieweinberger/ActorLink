@@ -7,3 +7,5 @@ interface GameInfo {
 interface Movies {
   [id: string]: string[];
 }
+type UseState<T> = Dispatch<SetStateAction<T>>
+type UpdateUseState = () => Promise<void>

@@ -19,7 +19,12 @@ function getGuessBackgroundColor(gameInfo: GameInfo, hardMode: boolean, guess: s
   return "bg-red-500";
 }
 
-export default function GuessDisplay({ gameInfo, gameOver, hardMode, guesses }: any): JSX.Element {
+export default function GuessDisplay({ gameInfo, gameOver, hardMode, guesses }: {
+  gameInfo: GameInfo,
+  gameOver: boolean,
+  hardMode: boolean,
+  guesses: string[]
+}): JSX.Element {
   return (
     <div className="flexContainer p-4 gap-4 blackBorder">
         
