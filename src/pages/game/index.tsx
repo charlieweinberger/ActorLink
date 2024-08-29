@@ -27,7 +27,7 @@ function initializeGame(): GameInfo {
 
 function getRandomOrder(): number[] {
   let array: number[] = [0, 1, 2, 3, 4];
-  for (let i = 4; i > 0; i--) {
+  for (let i: number = 4; i > 0; i--) {
       const j: number = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
   }
