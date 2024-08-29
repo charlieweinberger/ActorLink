@@ -44,7 +44,7 @@ function sortArray(inputArray: any[], randomOrder: number[]): any[] {
 
 // Main JSX element to return
 
-export default function Home() {
+export default function Home() { // TODO: Update this
   
   // React
 
